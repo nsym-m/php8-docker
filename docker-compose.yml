@@ -1,0 +1,37 @@
+version: "3.8"
+services:
+  php:
+    build:
+      context: ./docker/php
+    depends_on:
+      - mysql
+    volumes:
+      - ./html:/var/www/html
+      - ./docker/logs/php:/var/log/php
+      - lemp-test-socket-php:/var/run/php-fpm
+      - lemp-test-socket-db:/var/run/mysqld
+  web:
+    build:
+      context: ./docker/nginx
+    depends_on:
+      - php
+    ports:
+      - 85:80
+    volumes:
+      - ./html:/var/www/html
+      - ./docker/logs/nginx:/var/log/nginx
+      - lemp-test-socket-php:/var/run/php-fpm
+  mysql:
+    build:
+      context: ./docker/mysql
+    ports:
+      - 3309:3306
+    volumes:
+      - ./docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./docker/logs/mysql:/var/log/mysql
+      - lemp-test-db:/var/lib/mysql
+      - lemp-test-socket-db:/var/run/mysqld
+volumes:
+  lemp-test-db:
+  lemp-test-socket-php:
+  lemp-test-socket-db:
