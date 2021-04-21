@@ -7,6 +7,7 @@ php8とnginxとmysqlのdocker環境です
 - MySQL8.0
 
 ## その他
-PHP-fpmとNginxをunixドメインソケットでつないでいる
-MySQLとPHPもunixドメインソケット
-DBのデータをトップレベルVolumesを使うことで少し早くなるようにしている（未検証）
+- PHP-fpmとNginxをunixドメインソケットでつないでいる
+- MySQLとPHPもunixドメインソケット
+- DBのデータをトップレベルVolumesを使うことで少し早くなるようにしている（未検証）
+- Composer, Xdebug導入済み
