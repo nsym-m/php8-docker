@@ -10,5 +10,4 @@ try {
     echo "DB接続成功<br>";
 } catch (PDOException $e) {
     echo "DB接続失敗: " . $e->getMessage() . "\n";
-    exit();
 }
